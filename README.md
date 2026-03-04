@@ -1,20 +1,20 @@
-# ⚡ Kapt / Sessões
+# Kapt — Conectando fotógrafos e esportistas.
 
-> A plataforma definitiva para conexão entre atletas e Creators de esportes de ação.
+> A ponte definitiva entre quem performa e quem eterniza o movimento.
 
-Este módulo é o coração visual do **Kapt**, onde as sessões de fotos (surf, skate, bmx) são exibidas em alta performance, utilizando o stack mais moderno do ecossistema React.
+O **Kapt** é um ecossistema focado na entrega de alta performance para a fotografia esportiva. Seja em um pedal de estrada, uma maratona de montanha ou um treino intenso de triatlo, facilitamos a conexão entre fotógrafos profissionais e atletas que buscam o registro de sua superação.
 
 ## 🚀 Tech Stack
-- **Framework:** [Next.js 14+](https://nextjs.org/) (App Router)
-- **Estilização:** [Tailwind CSS](https://tailwindcss.com/)
-- **Ícones:** [Lucide React](https://lucide.dev/)
-- **Ambiente:** Desenvolvido em CachyOS (Linux)
+- **Framework:** [Next.js 16.1.5](https://nextjs.org/) (App Router & Server Actions)
+- **Styling:** Tailwind CSS (Arquitetura de Design System própria)
+- **Icons:** Lucide React
+- **Engine:** Desenvolvido e otimizado em CachyOS (Linux)
 
-## ✨ Funcionalidades Implementadas
-- [x] **Grid Mosaico Dinâmico:** Visualização de 4 imagens por sessão com carregamento otimizado.
-- [x] **Hover Interativo:** Efeito de zoom-in suave e transição de cores (Verde Volt).
-- [x] **Design de Alto Contraste:** Tipografia *bold italic* e estética de revistas de ação.
-- [x] **SSR-Safe:** Tratamento de hidratação para evitar mismatch no servidor.
+## ✨ Funcionalidades
+- [x] **Mosaico Dinâmico de Sessões:** Visualização ágil de provas e treinos.
+- [x] **Foco em Esportes Aeróbicos:** Estrutura pronta para ciclismo, corrida, natação e endurance.
+- [x] **UI de Alto Contraste:** Otimizada para visualização sob luz solar (Verde Volt).
+- [x] **Performance Next.js 16:** Hidratação ultra-rápida e zero CLS (Cumulative Layout Shift).
 
 ## 🛠️ Como rodar o projeto
 1. Instale as dependências: `npm install`
@@ -22,4 +22,4 @@ Este módulo é o coração visual do **Kapt**, onde as sessões de fotos (surf,
 3. Acesse: `http://localhost:3000`
 
 ---
-*Capture the motion. Kapt-tech 2026.*
+*Kapt — Capture the motion. 2026.*
