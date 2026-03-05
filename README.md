@@ -12,6 +12,31 @@ Este projeto é um Monorepo de alta performance gerenciado pelo **Turborepo** ut
 - **`/services/api`**: Backend em Go (Nativo `net/http`, SQLC, Neon Postgres).
 - **`/.spec`**: Fonte única da verdade para [Spec-Driven Development](./.spec).
 
+## 🏗️ Project Structure (Monorepo)
+
+O projeto utiliza **Turborepo** para gerenciar as aplicações e serviços, garantindo isolamento tecnológico e alta performance no pipeline de build.
+
+```text
+.
+├── apps/
+│   ├── web/                # Dashboard Admin (Next.js + Tailwind)
+│   ├── mobile/             # App do Cidadão (React Native + Nativewind) - [Em breve]
+│   └── docs/               # Documentação técnica (Storybook/Docusaurus)
+├── services/
+│   └── api/                # Backend em Go (Clean Architecture / Hexagonal)
+│       ├── cmd/api/        # Ponto de entrada (main.go)
+│       ├── internal/       # Lógica de Negócio Encapsulada
+│       │   ├── handler/    # Adaptadores de Entrada (HTTP/REST)
+│       │   ├── service/    # Regras de Domínio e Casos de Uso
+│       │   └── repository/ # Adaptadores de Saída (Persistência/DB)
+│       └── sqlc/           # Schemas e Queries SQL (Type-safe)
+├── packages/               # Configurações e bibliotecas compartilhadas
+│   ├── ui/                 # Componentes de interface compartilhados
+│   ├── typescript-config/  # Configurações de TS padronizadas
+│   └── eslint-config/      # Regras de Linting do projeto
+├── compose.yaml            # Orquestração de containers (DB, API, Web)
+└── turbo.json              # Pipeline de execução do Turborepo
+
 ## 🚀 Início Rápido
 1. Certifique-se de ter o **Docker** instalado.
 2. Instale as dependências: `npm install`.
