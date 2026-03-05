@@ -1,25 +1,21 @@
-# Kapt — Conectando fotógrafos e esportistas.
+# Kapt ⚡
 
-> A ponte definitiva entre quem performa e quem eterniza o movimento.
+**O Hub de Alta Performance para Fotografia de Esportes de Endurance.**
 
-O **Kapt** é um ecossistema focado na entrega de alta performance para a fotografia esportiva. Seja em um pedal de estrada, uma maratona de montanha ou um treino intenso de triatlo, facilitamos a conexão entre fotógrafos profissionais e atletas que buscam o registro de sua superação.
+O Kapt é uma plataforma especializada desenvolvida para conectar atletas (ciclistas, corredores) a fotógrafos profissionais, utilizando indexação por IA e fluxos de trabalho automatizados.
 
-## 🚀 Tech Stack
-- **Framework:** [Next.js 16.1.5](https://nextjs.org/) (App Router & Server Actions)
-- **Styling:** Tailwind CSS (Arquitetura de Design System própria)
-- **Icons:** Lucide React
-- **Engine:** Desenvolvido e otimizado em CachyOS (Linux)
+## 🏗 Arquitetura
+Este projeto é um Monorepo de alta performance gerenciado pelo **Turborepo** utilizando **npm**.
 
-## ✨ Funcionalidades
-- [x] **Mosaico Dinâmico de Sessões:** Visualização ágil de provas e treinos.
-- [x] **Foco em Esportes Aeróbicos:** Estrutura pronta para ciclismo, corrida, natação e endurance.
-- [x] **UI de Alto Contraste:** Otimizada para visualização sob luz solar (Verde Volt).
-- [x] **Performance Next.js 16:** Hidratação ultra-rápida e zero CLS (Cumulative Layout Shift).
+- **`/apps/web`**: Aplicação Web em Next.js 16.1.5 (Action-Volt Design).
+- **`/apps/app`**: Aplicação Mobile (Expo/React Native).
+- **`/services/api`**: Backend em Go (Nativo `net/http`, SQLC, Neon Postgres).
+- **`/.spec`**: Fonte única da verdade para [Spec-Driven Development](./.spec).
 
-## 🛠️ Como rodar o projeto
-1. Instale as dependências: `npm install`
-2. Inicie o servidor: `npm run dev`
-3. Acesse: `http://localhost:3000`
+## 🚀 Início Rápido
+1. Certifique-se de ter o **Docker** instalado.
+2. Instale as dependências: `npm install`.
+3. Inicie o ambiente de desenvolvimento: `npx turbo dev`.
 
 ---
-*Kapt — Capture the motion. 2026.*
+*Documentado com SDD e Gemini Skills para o ambiente Antigravity.*
