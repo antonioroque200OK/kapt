@@ -1,18 +1,18 @@
 services:
-  # Database local para desenvolvimento e testes geoespaciais
+  # 1. Local Database (PostGIS)
   db:
     image: postgis/postgis:15-3.3
     container_name: kapt_db_dev
     environment:
-      POSTGRES_USER: kapt_admin
-      POSTGRES_PASSWORD: kapt_password
-      POSTGRES_DB: kapt_local
+      postgres_user: kapt_admin
+      postgres_password: kapt_password
+      postgres_db: kapt_local
     ports:
-      - "5433:5432"
+      - "5433:5432" # Host access (CachyOS) on 5433
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-  # Instância local do n8n para prototipar fluxos de notificação
+  # 2. Local Automation Workflow
   n8n:
     image: n8nio/n8n:latest
     container_name: kapt_n8n_dev
@@ -24,6 +24,17 @@ services:
       - N8N_BASIC_AUTH_PASSWORD=kapt_n8n_pass
     volumes:
       - n8n_data:/home/node/.n8n
+
+  # 3. Development Workspace (Antigravity Environment)
+  workspace:
+    image: mcr.microsoft.com/devcontainers/universal:2
+    container_name: kapt_workspace
+    volumes:
+      - .:/workspace:cached
+    working_dir: /workspace
+    network_mode: service:db # Crucial: links workspace localhost to the 'db' service
+    user: codespace
+    command: sleep infinity
 
 volumes:
   postgres_data:
