@@ -48,17 +48,43 @@ Do NOT invoke any implementation skill, write any code, scaffold any project, or
 </HARD-GATE>
 
 ## Anti-Pattern: "This Is Too Simple To Need A Design"
+
 Every project goes through this process. Assumptions are the enemy of SDD (Specification-Driven Development).
 
 ## Checklist
+
 You MUST create a task for each of these items and complete them in order:
+
 1. **Explore project context** — check files, docs, recent commits.
 2. **Offer visual companion** — dedicated message for UI/Layout topics.
 3. **Ask clarifying questions** — one at a time.
 4. **Propose 2-3 approaches** — with trade-offs and recommendation.
 5. **Present design** — section by section, getting approval.
-6. **Write design doc** — save to `docs/specification/YYYY-MM-DD-<topic>-design.md`.
+6. **Write design doc** — save to `docs/specification/<category>-<slug>.md` (e.g., `biz-rewards.md`, `tech-auth.md`).
 7. **Transition to implementation** — invoke writing-plans skill.
+
+## 🛠 Development Standards
+
+### 1. Commit Convention (Conventional Commits)
+
+Format: `<type>(<scope>): <description>`
+
+- `feat`: New feature for the user.
+- `fix`: Bug fix for the user.
+- `docs`: Changes to documentation.
+- `style`: Formatting, missing semi colons, etc; no code change.
+- `refactor`: Refactoring production code.
+- `test`: Adding missing tests, refactoring tests; no production code change.
+- `chore`: Updating build tasks, package manager configs, etc; no production code change.
+
+### 2. Documentation Naming
+
+Files in `docs/specification/` must follow the format: `<category>-<slug>.md`
+
+- `biz-`: Business rules and logic.
+- `tech-`: Technical architecture and implementation specs.
+- `ux-`: User flows and interface designs.
+- `api-`: Backend/API specific constraints.
 
 ## Process Flow (DOT)
 ```dot
