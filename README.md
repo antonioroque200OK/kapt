@@ -5,12 +5,13 @@
 O Kapt é uma plataforma especializada desenvolvida para conectar atletas (ciclistas, corredores) a fotógrafos profissionais, utilizando indexação por IA e fluxos de trabalho automatizados.
 
 ## 🏗 Arquitetura
+
 Este projeto é um Monorepo de alta performance gerenciado pelo **Turborepo** utilizando **npm**.
 
 - **`/apps/web`**: Aplicação Web em Next.js 16.1.5 (Action-Volt Design).
-- **`/apps/app`**: Aplicação Mobile (Expo/React Native).
+- **`/apps/mobile`**: Aplicação Mobile (Expo/React Native).
 - **`/services/api`**: Backend em Go (Nativo `net/http`, SQLC, Neon Postgres).
-- **`/.spec`**: Fonte única da verdade para [Spec-Driven Development](./.spec).
+- **`/docs/specification`**: Fonte única da verdade para [Spec-Driven Development](./docs/specification).
 
 ## 🏗️ Project Structure (Monorepo)
 
@@ -19,9 +20,9 @@ O projeto utiliza **Turborepo** para gerenciar as aplicações e serviços, gara
 ```text
 .
 ├── apps/
-│   ├── web/                # Dashboard Admin (Next.js + Tailwind)
+│   ├── web/                # Seeker Dashboard (Next.js + Tailwind)
 │   ├── mobile/             # App do Cidadão (React Native + Nativewind) - [Em breve]
-│   └── docs/               # Documentação técnica (Storybook/Docusaurus)
+│   └── base/               # Landing Page & Design Foundation
 ├── services/
 │   └── api/                # Backend em Go (Clean Architecture / Hexagonal)
 │       ├── cmd/api/        # Ponto de entrada (main.go)
