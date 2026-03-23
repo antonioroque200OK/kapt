@@ -42,6 +42,13 @@ related_issues: []
   - **"Em breve"**: For future events (`occurrence_date > today`).
   - **"Fotos Disponíveis"**: For past events (`occurrence_date < today`).
 
+### 4. Testing & Pull Request Flow (Strict Protocol)
+
+- **Test-Driven:** Every new feature, endpoint, or UI component MUST include automated tests (e.g., Go tests for backend, Jest/React Testing Library for frontend).
+- **Verification:** You MUST run the tests and verify they pass before staging files.
+- **No Direct Main Commits:** Never commit directly to the `main` branch.
+- **PR Process:** Once tests pass, create a new branch (e.g., `feat/seeker-auth`), commit the code following the Conventional Commits format, and generate a Pull Request. Wait for user review.
+
 ---
 
 name: brainstorming
@@ -108,3 +115,57 @@ digraph brainstorming {
     "User approves design?" -> "Write design doc" [label="yes"];
     "Write design doc" -> "Invoke writing-plans skill";
 }
+
+## 4. ⚙️ Kapt Engineering Workflow & AI Orchestration
+1. The Core Philosophy: Spec-Driven Development (SDD)
+The development lifecycle is strictly governed by documentation.
+
+Specs (docs/specification/*.md): Dictate the HOW and WHY (Architecture, UI/UX rules, Business Logic).
+
+Issues (GitHub Kanban): Dictate the WHAT and WHEN (Actionable tasks).
+
+Relationship: It is a 1-to-Many relationship. A single architectural Spec will generate multiple granular Issues over time.
+
+2. Issue Mapping Strategy
+When creating an Issue, you must point the AI to the correct foundational context based on the nature of the task:
+
+Backend / Database / API routes: Link to tech-core.md.
+
+Infrastructure / External APIs / Storage: Link to tech-storage.md.
+
+Frontend / User Flows / Screens: Link to ux-[feature].md.
+
+Monetization / Pricing / Gamification: Link to biz-[feature].md.
+
+3. GitHub Issue Standard Template
+To ensure the AI agent (Claude Code) can autonomously read and execute a task from the GitHub Kanban via the CLI, every Issue description MUST follow this exact markdown template:
+
+Markdown
+**Objective:** [One sentence explaining the business/technical goal of this specific task]
+
+**Tasks for Claude Code:**
+1. [Actionable step 1, e.g., Create the Next.js component...]
+2. [Actionable step 2, e.g., Implement the validation logic...]
+3. [Actionable step 3, e.g., Write unit tests...]
+
+**Related Specs for Implementation:** - `docs/specification/[primary-spec].md`
+- `docs/specification/[secondary-spec].md` (If business rules apply)
+4. Terminal Execution (The Prompt Engine)
+Once the Issue is in the "To Do" column, use the following generic prompt structure in the IDE terminal to trigger the AI agent. This prompt enforces context-loading and test-driven development before any code is written:
+
+"Check my GitHub issues using the gh cli. Find the issue related to '[Keyword or Issue Number]'. Read the issue description carefully. Before writing any code, read the related specification(s) mentioned in the description, as well as the CLAUDE.md rules. Outline your implementation plan step-by-step, including the packages you will use and the tests you will write. Wait for my approval before modifying any files or creating a new branch."
+
+## 5. Prompt Library: Batch Issue Creation (Epics)
+
+Sempre que formos iniciar o desenvolvimento de um novo Epic (Módulo), o Tech Lead (Humano) deve usar o prompt abaixo no terminal do Claude Code para gerar e injetar as Issues automaticamente no GitHub Kanban.
+
+**Copie e preencha as variáveis entre colchetes antes de enviar para a IA:**
+
+> "Act as my Technical Product Manager. We are going to batch-create GitHub issues specifically for the **[Epic: NOME_DO_EPICO]**. 
+> 
+> 1. Read the specification documents related to this Epic: `[INSERIR_CAMINHOS_DOS_ARQUIVOS.md]`.
+> 2. Break down the implementation into granular, logical engineering tasks.
+> 3. Format each task following our standard Issue Template (Objective, Tasks for Claude Code, Related Specs) as defined in the engineering workflow. 
+> 4. Ensure every generated issue title strictly starts with `[Epic: NOME_DO_EPICO]`.
+> 5. Present the drafted issues to me for review.
+> 6. Once I reply with 'Approved', use the `gh issue create` command in your terminal to batch-create all of them in my GitHub repository."
