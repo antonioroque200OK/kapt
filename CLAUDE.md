@@ -9,39 +9,41 @@ related_issues: []
 
 ## Kapt Project Intelligence & Brainstorming
 
-## 📖 Glossary & Entities
-- **Occurrence:** The central domain entity. Represents a physical event (race, cycling, etc.).
-- **Seeker:** The end-user/athlete. Primary customer searching for their own photos.
-- **Kaptured:** A photo that has been successfully processed, identified, and is ready for sale.
-- **B-roll / Context:** Atmosphere photos (scenery, crowd, medals). Sold as "Pack de Recordação".
-- **Identification Engine:** The biometric/logic layer that matches a Seeker to their photos using Selfie or Bib Number.
-- **Upstream (Org):** Remote `Kapt-tech/kapt` (The source of truth).
-- **Origin (Personal):** Remote `antonioroque200OK/kapt` (Developer's fork).
+## 📖 Glossary & Entities (Strict Camel Case Enforced)
+
+- `occurrence`: The central domain entity. Represents a physical event (race, cycling, etc.).
+- `seeker`: The guest end-user/athlete searching for photos.
+- `registeredSeeker`: A returning athlete with saved biometrics and LGPD opt-in.
+- `promoter`: The event organizer/race director (B2B target).
+- `photographer`: The freelance supplier of photos.
+- `actionVolt`: Our Design System (Dark mode, electric neon, high contrast).
+- **Kaptured:** A photo successfully processed and identified.
+- **B-roll / Context:** Atmosphere photos (scenery, medals). Bundled into the "Pack de Recordação" (UI Label).
 
 ## 🚀 Business Rules & Core Logic (The "Kapt Constitution")
-### 1. Privacy & LGPD Compliance
-- **Strict Prohibition:** No public galleries showing identifiable faces. 
-- **The Wall:** Access to "Kaptured" photos is granted ONLY after:
-    1. Identification (Selfie/Bib).
-    2. Explicit LGPD Opt-in.
-- **Occurrence Cards:** Must use atmosphere/B-roll images only to avoid unauthorized face exposure.
 
-### 2. Monetization & Retail Insights
-- **Replacement Intent:** Computer Vision must flag gear wear and brand loyalty (e.g., "User switched from Mizuno to Nike").
-- **Retail Reports:** Real-time market share data is a primary B2B product.
-- **Photographer Incentives:** - +5% payout bonus for clear gear/brand detection.
-    - Commission on "Pack de Recordação" (B-roll) upsells.
+### 1. Privacy & LGPD Compliance
+
+- **Strict Prohibition:** No public galleries showing identifiable faces.
+- **The Wall:** "Kaptured" photos are granted ONLY after Identification and LGPD Opt-in.
+- **Zero-Click Discovery:** A logged-in `registeredSeeker` automatically sees their photos under "🔒 Sua Galeria Privada".
+
+### 2. Monetization (DaaS Architecture)
+
+- **DaaS Tiers:** We extract gear wear and brand loyalty to sell B2B reports (Tier 1), Ads (Tier 2), and APIs (Tier 3).
+- **Photographer Incentives:** - +5% payout bonus for clear gear detection (Paid ONLY if the photo sells).
+  - Fixed LGPD Bounty (e.g., R$ 5.00) for uploading the first 20 B-roll photos.
+- **Upsell Rule:** B-roll is never sold solo. It is used to anchor the "Pack de Recordação" price.
 
 ### 3. Localization & UI State (PT-BR)
-- Status labels must follow these logic constraints:
-    - **"Em breve"**: For future events (`occurrence_date > today`).
-    - **"Fotos Disponíveis"**: For past events (`occurrence_date < today`).
-    - *Note: "Acontecendo" is currently deprecated/under discussion.*
 
-### 4. Reward System
-- **Global Opt-in:** Users who grant permanent biometric consent receive the 1st photo of the next event for free.
+- UI Labels are strictly in Portuguese.
+- Status labels:
+  - **"Em breve"**: For future events (`occurrence_date > today`).
+  - **"Fotos Disponíveis"**: For past events (`occurrence_date < today`).
 
 ---
+
 name: brainstorming
 description: "You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores user intent, requirements and design before implementation."
 ---
@@ -78,40 +80,22 @@ You MUST create a task for each of these items and complete them in order:
 
 Format: `<type>(<scope>): <description>`
 
-- `feat`: New feature for the user.
-- `fix`: Bug fix for the user.
-- `docs`: Changes to documentation.
-- `style`: Formatting, missing semi colons, etc; no code change.
-- `refactor`: Refactoring production code.
-- `test`: Adding missing tests, refactoring tests; no production code change.
-- `chore`: Updating build tasks, package manager configs, etc; no production code change.
+- `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`.
 
 ### 2. Documentation Naming
 
 Files in `docs/specification/` must follow the format: `<category>-<slug>.md`
 
-- `biz-`: Business rules and logic.
-- `tech-`: Technical architecture and implementation specs.
-- `ux-`: User flows and interface designs.
-- `api-`: Backend/API specific constraints.
+- `biz-`, `tech-`, `ux-`, `api-`.
 
 ### 3. Specification Front Matter & Hard Gate Enforcement
 
 All files in `docs/specification/` MUST include a YAML Front Matter block at the top.
 
-Example:
----
-title: "Identification Engine"
-description: "Biometric matching logic and Selfie/Bib upload flows."
-type: "biz"
-epic: "seeker"
-status: "approved"
-related_issues: ["UC02"]
----
-
-**CRITICAL RULE FOR CLAUDE CODE:** Before writing ANY implementation code, you must read the related `.md` spec. If the `status` in the Front Matter is `draft` or `in-review`, you MUST STOP and refuse to write code until the user changes it to `approved`. This is the `<HARD-GATE>` in action.
+**CRITICAL RULE FOR AI CODE AGENTS:** Before writing ANY implementation code, you must read the related `.md` spec. If the `status` in the Front Matter is `draft` or `in-review`, you MUST STOP and refuse to write code until the user changes it to `approved`. This is the `<HARD-GATE>` in action.
 
 ## Process Flow (DOT)
+
 ```dot
 digraph brainstorming {
     "Explore project context" -> "Visual questions ahead?";
