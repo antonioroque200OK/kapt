@@ -10,25 +10,28 @@ related_issues: ["UC02", "UC03"]
 # Spec: Seeker Identification & Privacy Flow
 
 ## 1. Context & Objectives
-Implement a secure, LGPD-compliant entry point for Seekers to access their photos while capturing retail-relevant data.
+
+Implement a secure, LGPD-compliant entry point for Seekers, emphasizing Zero-Click Discovery for returning users and frictionless onboarding for new ones.
 
 ## 2. Architecture & Data Flow
-1. **Occurrence Landing:** Displays metadata and atmosphere (B-roll) imagery only.
+
+1. **Occurrence Landing:** Displays public B-roll imagery (The Vitrine). If no B-roll exists, an `actionVolt` abstract fallback cover is used.
 2. **Identification Engine:**
-   - **Methods:** Selfie upload or Event Organizer Bib Number.
-   - **Privacy Wall:** Mandatory LGPD Opt-in (Global or Event-specific) required before displaying any matched results.
-3. **Private Gallery:** Renders "Kaptured" photos exclusive to the identified Seeker.
-4. **Checkout:** Transactional flow including coupons and "Pack de Recordação" (B-roll) upsell.
+   - **New `seeker`:** Passwordless OTP modal -> Selfie upload -> LGPD Opt-in.
+   - **`registeredSeeker`:** Zero-Click Discovery. Biometrics match on page load.
+3. **Private Gallery:** Matches appear in an exclusive UI container titled **"🔒 Sua Galeria Privada"**, segregated from public B-roll.
+4. **Checkout (The Upsell):** B-roll is NEVER sold individually. Users are prompted with a choice: buy single photos or the complete "Pack de Recordação" (All user photos + All B-roll).
 
 ## 3. Business Rules Implementation
+
 - **Dynamic Tags (UI):**
   - Future: "Em breve"
   - Past: "Fotos Disponíveis"
-  - *Note: "Acontecendo" status is currently deprecated.*
 - **Monetization & Incentives:**
   - **Global Opt-in:** Rewards user with 1st free photo in the subsequent event.
-  - **Brand Detection:** +5% payout bonus for photographers on clear gear/brand visibility.
+  - **Brand Detection:** +5% conditional payout bonus for photographers.
 
 ## 4. Success Criteria
+
 - Zero unauthorized exposure of third-party faces.
-- Accurate persistent storage of Opt-in status in PostgreSQL.
+- Flawless execution of Zero-Click Discovery for authenticated `registeredSeekers`.

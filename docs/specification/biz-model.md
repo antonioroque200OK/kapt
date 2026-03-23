@@ -10,48 +10,40 @@ related_issues: []
 # Business Model Canvas: Kapt
 
 ## 1. Customer Segments
-- **Seekers (Athletes):** Runners, cyclists, and sports enthusiasts seeking high-quality, private photo memories.
+
+- **Seekers & Registered Seekers:** Athletes seeking high-quality, private photo memories with zero-friction discovery.
 - **Sports Retailers & Brands:** Companies looking for real-world market share data and "Replacement Intent" insights.
-- **Event Organizers:** Partners looking for a secure, LGPD-compliant photo delivery solution for participants.
+- **Promoters (Event Organizers):** Partners looking for data to sell better sponsorship quotas and a secure LGPD-compliant photo solution.
+- **Photographers:** Freelancers looking for an automated, highly profitable sales channel.
 
 ## 2. Value Propositions
-- **For Seekers:** Frictionless, biometric-based photo discovery with total privacy (no public galleries).
-- **For Retailers:** Actionable data on gear wear and brand loyalty, enabling precision marketing.
-- **For Photographers:** Advanced sales tech (biometrics) and bonuses for high-quality metadata/brand capture.
 
-## 3. Channels
-- **Kapt Platform:** Primary web interface for photo search and purchase.
-- **Partner Ecosystem:** Event organizers and photographer networks.
-- **Social Media Integration:** Link-sharing with UTM tracking for attribution.
-- **B2B Dashboard:** Data portal for retail brands.
+- **For Seekers:** Frictionless "Zero-Click Discovery" with total privacy ("🔒 Sua Galeria Privada").
+- **For Retailers:** Actionable DaaS insights on gear wear and brand loyalty.
+- **For Promoters:** Intelligence reports to increase sponsorship revenue.
+- **For Photographers:** Zero-touch uploads, instant storefronts, and gamified AI bonuses for high-quality metadata capture.
 
-## 4. Customer Relationships
-- **Self-Service:** Automated biometric identification and checkout.
-- **Loyalty Programs:** "Global Opt-in" incentives (e.g., first photo free at the next event).
-- **Privacy-First Brand:** Positioned as the trusted guardian of the athlete's biometric data.
+## 3. Channels & Relationships
 
-## 5. Revenue Streams
-- **Transactional:** Direct sale of "Kaptured" photos and "Pack de Recordação" (B-roll).
-- **B2B Data Licensing:** Selling anonymized market share reports to retailers.
-- **Platform Fees:** Commission on photographer sales.
-- **Exclusivity Fees:** Premium fees for photographers to "lock" specific occurrences.
+- **Kapt Platform:** Primary web interface (`actionVolt` UI).
+- **Self-Service:** Passwordless OTP and automated biometric checkout.
+- **Loyalty Programs:** "Global Opt-in" incentives.
+- **Privacy-First Brand:** Trusted guardian of biometric data.
 
-## 6. Key Activities
-- **Biometric Identification Engine:** Maintaining the core matching logic (Selfie/Bib).
-- **Computer Vision Training:** Refining gear and brand detection algorithms.
-- **Strategic Partnerships:** Recruiting "Beta Photographers" and event organizers.
+## 4. Revenue Streams (The 3-Tier DaaS Architecture)
 
-## 7. Key Resources
-- **Tech Stack:** Go backend, PostgreSQL, and AI processing infrastructure.
-- **Data Assets:** Historical photo database and consented biometric profiles.
-- **Photographer Network:** Professional and enthusiast contributor base.
+- **The Base (B2C):** Direct sale of individual photos and the "Pack de Recordação" (Upsell bundle).
+- **Tier 1 (B2B Reports):** Selling anonymized market share and equipment reports to `promoters`.
+- **Tier 2 (B2B Targeted Ads):** Charging retail brands for "Access" to send targeted coupons based on gear wear.
+- **Tier 3 (B2B API/Infra):** Licensing our computer vision API to enterprise retailers.
 
-## 8. Key Partners
-- **Beta Photographers:** Early adopters providing historical archives for platform seeding.
-- **Event Organizers:** Providing bib data and logistical access.
-- **Retail Brands:** Partners co-developing data-driven marketing campaigns.
+## 5. Key Activities & Resources
 
-## 9. Cost Structure
-- **Infrastructure:** Photo storage (Cold storage for archives) and AI compute power.
-- **Development:** Antigravity/Go environment maintenance and feature scaling.
-- **Customer Acquisition:** Marketing costs for Seeker and Photographer growth.
+- **AI Processing:** Biometric matching and gear/brand Computer Vision training.
+- **Data Assets:** Consented biometric profiles and structured retail data.
+- **Tech Stack:** Go backend, PostgreSQL/Neon, high-performance UI.
+
+## 6. Cost Structure
+
+- **Infrastructure:** Cold/Hot storage, AI compute power, and Cloud hosting.
+- **Acquisition & Bounties:** Fixed payouts for LGPD-compliant B-roll missions.
