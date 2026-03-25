@@ -30,7 +30,8 @@ VALUES (
         $2,
         $3,
         $4,
-        ST_GeomFromText($5, 4326),
+        ST_GeomFromText($5::text, 4326),
+        -- Explicit cast to text for SQLC mapping
         $6,
         $7,
         $8,
@@ -42,6 +43,7 @@ RETURNING id,
     description,
     location_name,
     ST_AsText(location_geom)::text AS location_geom,
+    -- Casting to text ensures string output
     start_time,
     end_time,
     status,
@@ -54,7 +56,7 @@ type CreateOccurrenceParams struct {
 	Title          string         `json:"title"`
 	Description    sql.NullString `json:"description"`
 	LocationName   string         `json:"location_name"`
-	StGeomfromtext interface{}    `json:"st_geomfromtext"`
+	Column5        string         `json:"column_5"`
 	StartTime      time.Time      `json:"start_time"`
 	EndTime        time.Time      `json:"end_time"`
 	Status         string         `json:"status"`
@@ -81,7 +83,7 @@ func (q *Queries) CreateOccurrence(ctx context.Context, arg CreateOccurrencePara
 		arg.Title,
 		arg.Description,
 		arg.LocationName,
-		arg.StGeomfromtext,
+		arg.Column5,
 		arg.StartTime,
 		arg.EndTime,
 		arg.Status,

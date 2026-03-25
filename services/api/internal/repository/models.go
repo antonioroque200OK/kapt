@@ -17,7 +17,7 @@ type Occurrence struct {
 	Title          string         `json:"title"`
 	Description    sql.NullString `json:"description"`
 	LocationName   string         `json:"location_name"`
-	LocationGeom   interface{}    `json:"location_geom"`
+	LocationGeom   string         `json:"location_geom"`
 	StartTime      time.Time      `json:"start_time"`
 	EndTime        time.Time      `json:"end_time"`
 	Status         string         `json:"status"`

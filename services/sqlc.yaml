@@ -1,11 +1,16 @@
 version: "2"
 sql:
-  - schema: "sqlc/migration/000001_init_schema.up.sql"
+  - schema: "sqlc/migration"
     queries: "sqlc/query/"
     engine: "postgresql"
     gen:
       go:
         package: "repository"
-        out: "internal/repository"
+        # Ensures the code is generated within the API's internal repository
+        out: "api/internal/repository"
         emit_json_tags: true
         emit_interface: true
+        overrides:
+          # Direct column mapping (Stronger than type mapping)
+          - column: "occurrences.location_geom"
+            go_type: "string"
