@@ -13,8 +13,16 @@ import (
 type Querier interface {
 	CreateOccurrence(ctx context.Context, arg CreateOccurrenceParams) (CreateOccurrenceRow, error)
 	CreatePhotographer(ctx context.Context, arg CreatePhotographerParams) (Photographer, error)
+	// Registers a new seeker in the system
+	CreateSeeker(ctx context.Context, email string) (Seeker, error)
 	GetOccurrenceBySlug(ctx context.Context, slug string) (GetOccurrenceBySlugRow, error)
+	// Retrieves a seeker by their unique email address
+	GetSeekerByEmail(ctx context.Context, email string) (Seeker, error)
 	ListOccurrencesByPhotographer(ctx context.Context, photographerID uuid.UUID) ([]ListOccurrencesByPhotographerRow, error)
+	// Inserts or updates an OTP code for a specific email
+	UpsertOTP(ctx context.Context, arg UpsertOTPParams) (OtpCode, error)
+	// Validates an OTP code and checks for expiration
+	VerifyOTP(ctx context.Context, arg VerifyOTPParams) (OtpCode, error)
 }
 
 var _ Querier = (*Queries)(nil)

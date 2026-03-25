@@ -25,6 +25,15 @@ type Occurrence struct {
 	CreatedAt      time.Time      `json:"created_at"`
 }
 
+type OtpCode struct {
+	ID        int32        `json:"id"`
+	Email     string       `json:"email"`
+	Code      string       `json:"code"`
+	ExpiresAt time.Time    `json:"expires_at"`
+	Used      sql.NullBool `json:"used"`
+	CreatedAt time.Time    `json:"created_at"`
+}
+
 type Photographer struct {
 	ID              uuid.UUID      `json:"id"`
 	Name            string         `json:"name"`
@@ -33,4 +42,10 @@ type Photographer struct {
 	StripeAccountID sql.NullString `json:"stripe_account_id"`
 	CreatedAt       time.Time      `json:"created_at"`
 	UpdatedAt       time.Time      `json:"updated_at"`
+}
+
+type Seeker struct {
+	ID        uuid.UUID `json:"id"`
+	Email     string    `json:"email"`
+	CreatedAt time.Time `json:"created_at"`
 }

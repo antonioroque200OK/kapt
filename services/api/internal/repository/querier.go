@@ -13,8 +13,13 @@ import (
 type Querier interface {
 	CreateOccurrence(ctx context.Context, arg CreateOccurrenceParams) (CreateOccurrenceRow, error)
 	CreatePhotographer(ctx context.Context, arg CreatePhotographerParams) (Photographer, error)
+	CreateSeeker(ctx context.Context, email string) (Seeker, error)
 	GetOccurrenceBySlug(ctx context.Context, slug string) (GetOccurrenceBySlugRow, error)
+	GetSeekerByEmail(ctx context.Context, email string) (Seeker, error)
 	ListOccurrencesByPhotographer(ctx context.Context, photographerID uuid.UUID) ([]ListOccurrencesByPhotographerRow, error)
+	MarkOTPAsUsed(ctx context.Context, id int32) error
+	UpsertOTP(ctx context.Context, arg UpsertOTPParams) (OtpCode, error)
+	VerifyOTP(ctx context.Context, arg VerifyOTPParams) (OtpCode, error)
 }
 
 var _ Querier = (*Queries)(nil)
