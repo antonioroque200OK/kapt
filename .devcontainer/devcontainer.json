@@ -1,6 +1,16 @@
 {
     "name": "Kapt",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "24"
+        },
+        "ghcr.io/devcontainers/features/go:1": {
+            "version": "1.24"
+        }
+    },
+    "postCreateCommand": "npm install",
     "remoteEnv": {
-        "PATH": "/home/antonio/.nvm/versions/node/v24.13.0/bin:${containerEnv:PATH}"
+        "NEXT_PUBLIC_API_URL": "http://localhost:8080"
     }
 }
