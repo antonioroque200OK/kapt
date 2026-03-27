@@ -9,14 +9,14 @@ related_issues: []
 
 ## 📖 Glossary & Entities (Strict Camel Case Enforced)
 
-- `occurrence`: The central domain entity. Represents a physical event (race, cycling, etc.).
-- `seeker`: The guest end-user/athlete searching for photos.
+- `occurrence`: The central domain entity. Represents a physical event/cobertura.
+- `seeker`: The guest end-user/athlete (end consumer).
 - `registeredSeeker`: A returning athlete with saved biometrics and LGPD opt-in.
-- `promoter`: The event organizer/race director (B2B target).
-- `photographer`: The freelance supplier of photos.
-- `actionVolt`: Our Design System (Dark mode, electric neon, high contrast).
+- `promoter`: The event organizer/race director.
+- `photographer`: The professional "Creator" supplying photos.
+- `actionVolt`: Our Design System (Black #000000 + Volt #CEFF00 accent).
 - **Kaptured:** A photo successfully processed and identified.
-- **B-roll / Context:** Atmosphere photos (scenery, medals). Bundled into the "Pack de Recordação" (UI Label).
+- **B-roll / Context:** Atmosphere photos (scenery, medals). Bundled into the "Pack de Recordação."
 
 ## 🚀 Business Rules & Core Logic (The "Kapt Constitution")
 
@@ -24,14 +24,13 @@ related_issues: []
 
 - **Strict Prohibition:** No public galleries showing identifiable faces.
 - **The Wall:** "Kaptured" photos are granted ONLY after Identification and LGPD Opt-in.
-- **Zero-Click Discovery:** A logged-in `registeredSeeker` automatically sees their photos under "🔒 Sua Galeria Privada".
+- **Zero-Click Discovery:** A logged-in `registeredSeeker` automatically sees their photos under "🔒 Sua Galeria Privada."
 
-### 2. Monetization (DaaS Architecture)
+### 2. Monetization (DaaS Evolution)
 
-- **DaaS Tiers:** We extract gear wear and brand loyalty to sell B2B reports (Tier 1), Ads (Tier 2), and APIs (Tier 3).
-- **Photographer Incentives:** - +5% payout bonus for clear gear detection (Paid ONLY if the photo sells).
-  - Fixed LGPD Bounty (e.g., R$ 5.00) for uploading the first 20 B-roll photos.
-- **Upsell Rule:** B-roll is never sold solo. It is used to anchor the "Pack de Recordação" price.
+- **DaaS Tiers:** We extract gear wear, brand loyalty, and "wearing" states to sell hyper-segmented insights to brands.
+- **Photographer Incentives:** +5% payout bonus for clear gear detection (Paid ONLY if the photo sells).
+- **Upsell Rule:** B-roll is never sold solo. It anchors the "Pack de Recordação" price.
 
 ### 3. Localization & UI State (PT-BR)
 

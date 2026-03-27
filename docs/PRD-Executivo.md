@@ -7,62 +7,47 @@ status: "approved"
 ai_instruction: "DO NOT use this file for code generation. Refer to the specific /specification/*.md files for SDD."
 ---
 
-📖 Master Product Requirements Document (PRD) - Kapt
+## Master Product Requirements Document (PRD) - Kapt (v2.0)
 
-1. Product Vision (Elevator Pitch)
-Kapt is not just a sports photography marketplace. It is a B2B DaaS (Data-as-a-Service) platform disguised as a B2C photography e-commerce. We use photo sales as a vehicle to capture, process via AI (Computer Vision), and structure valuable sports retail data (brands, equipment, wear and tear), selling this intelligence to the market.
+## 1. Project Identity & Mission Statement
 
-2. Official Kapt Glossary
-To maintain consistency across code and communication, these are the immutable system entities (using Camel Case for technical references):
+Kapt is a high-performance digital platform for the management, distribution, and monetization of official multisport event photography. By leveraging Computer Vision (CV) and AI, Kapt automates the bridge between professional "Creators" (photographers) and athletes. Its ultimate evolution is a **Data as a Service (DaaS)** provider, delivering hyper-segmented consumer insights—based on actual performance and equipment usage—to sports retailers and brands.
 
-seeker: The athlete/runner (the end customer who buys the photo).
+## 2. Core Features & AI Capabilities
 
-registeredSeeker: A returning athlete who already has an account, saved biometrics, and LGPD opt-in.
+- **AI-Driven Automated Tagging:**
+    - **Facial Recognition:** High-precision identification of athletes across thousands of photos.
+    - **Equipment & Brand Detection:** Automatic identification of footwear (running shoes), apparel, and gear (bikes, helmets, watches).
+- **"Wearing" State & Analytics:** Analysis of brand loyalty, equipment wear-and-tear levels, and color preferences to generate consumer profiles.
+- **Multisport Mosaic Interface:** Dynamic, responsive home screen utilizing high-density image grids for active "Coberturas."
+- **Secure OTP Authentication:** Passwordless, friction-free login flow via email/mobile.
+- **DaaS Market Intelligence:** Aggregated data on brand dominance, gear lifespan, and demographic equipment trends.
 
-occurrence: The sporting event (e.g., Maratona SP, Corrida de São Luís).
+## 3. Technical Stack & Architecture
 
-promoter: The event organizer/race director.
+- **Frontend:** Next.js (App Router), TypeScript, Tailwind CSS.
+- **Backend:** Go (Golang) for high-concurrency API and data processing.
+- **AI/ML Engine (Python):** YOLO (object/gear detection), DeepFace/FaceNet (facial recognition), PyTorch/TensorFlow (segmentation).
+- **Orchestration:** n8n manages the pipeline (uploads -> AI -> notifications).
+- **Infrastructure:** Docker, Portainer, Traefik/Nginx, Neon (PostgreSQL) + PostGIS.
 
-photographer: The freelance photographer (our supplier).
+## 4. Design Style Guide (Black & Volt)
 
-actionVolt: Our Design System (UI/UX in Dark Mode with neon/electric details for high contrast and premium aesthetics).
+- **Palette:** Background: Absolute Black (#000000); Accent: Volt (#CEFF00) for CTAs; Secondary: Zinc Grays.
+- **Typography:** Brand: Heavy, italicized bold "KAPT"; Functional: Monospaced for technical labels (e.g., "COBERTURAS").
 
-1. Monetization Architecture (How Kapt makes money)
-The Base (B2C - Marketplace): Sale of individual photos or the complete package (UI Label: "Pack de Recordação") directly to the seeker.
+## 5. Evolution Phases
 
-Tier 1 (B2B - Reports): Providing profile and equipment data to the promoter, allowing them to sell more expensive sponsorship quotas.
+- **Phase 1 (Current):** Infrastructure stabilization. Next.js + Go core, basic gallery, and OTP authentication.
+- **Phase 2 (AI Integration):** Implementation of automated facial and bib-number recognition. Launch of the "Creator Dashboard."
+- **Phase 3 (Apparel & Gear Analytics):** Deployment of CV models to detect equipment brands and "wearing" states.
+- **Phase 4 (DaaS Full Launch):** Real-time dashboarding and predictive analytics for retailers.
 
-Tier 2 (B2B - Targeted Advertising): Kapt sells "Access" to brands (e.g., Asics pays to send a coupon to registeredSeekers who ran with worn-out shoes).
+## 6. Official Glossary
 
-Tier 3 (B2B - Infrastructure/API): Licensing our real-time image processing API to retail giants (e.g., Centauro) to create campaigns in their own apps.
-
-1. Photographer Journey (Supply)
-The goal is to retain the supplier through zero friction and financial gamification.
-
-Zero-Touch Upload: The photographer simply drags the folder. The system processes everything in the background.
-
-Post-Upload Report (Dopamine Trigger): At the end of the upload, we display a summary showing how much equipment the AI detected and the potential extra earnings tied to that reading.
-
-Conditional Commission (Cash Protection): The photographer receives the AI bonus (+5%) for photos where equipment was detected only if the photo is purchased by the seeker.
-
-The B-Roll Rule (LGPD Bounty): To ensure the public showcase of the event without violating the LGPD, we pay a fixed micro-bonus (e.g., R$ 5.00) for the first 20 context photos (asphalt, finish line, medals) uploaded.
-
-1. Seeker Journey (Demand)
-The goal is maximum conversion with zero unnecessary clicks.
-
-Zero-Click Discovery (The Magic): If the user is a registeredSeeker and logged in, the backend matches their biometrics on page load. Their photos immediately appear at the top of the occurrence page in a section labeled "🔒 Sua Galeria Privada".
-
-Frictionless Onboarding: Passwordless authentication modal (Email/WhatsApp + 4-digit OTP), followed immediately by a selfie request. No long forms.
-
-Upsell Strategy (Pack de Recordação): B-roll is never sold individually. It is used as leverage. The seeker can buy a single photo (e.g., R$ 15.00) or be induced to take all their photos + all the event's B-roll (UI Label: "Pack de Recordação") for an anchored price (e.g., R$ 39.90).
-
-Storage Management: Delivery focuses on the cloud gallery. If the user wants the complete Pack, we send a link to a .zip file via email so we don't crash their mobile device storage.
-
-1. Expansion Strategy (Occurrences)
-Kapt owns the calendar to avoid depending on the promoter in the early stages.
-
-Phase 1 (MVP - São Luís): Manual insertion of occurrences by our internal team (Control and Quality).
-
-Phase 2 (Scale): Use of ScrapingBee to pull national calendars (TicketSports, etc.) and automatically populate our database.
-
-Empty States (Contingency): If a race has no B-roll from the photographer, the page collapses the public showcase and the event card gets a dynamic abstract cover based on the sport (UI Fallback).
+- `seeker`: The athlete/runner (end consumer).
+- `registeredSeeker`: A returning athlete with saved biometrics and LGPD opt-in.
+- `occurrence`: The sporting event.
+- `promoter`: The event organizer.
+- `photographer`: The professional "Creator" supplying photos.
+- `actionVolt`: Our Design System (Table Black + Volt accent).

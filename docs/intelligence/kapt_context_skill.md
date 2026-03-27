@@ -6,39 +6,42 @@ epic: "platform"
 status: "approved"
 ---
 
-# Gemini Skill: Kapt Project Governance & Context
+## Gemini Skill: Kapt Project Governance & Context (v2.0)
 
 ## 1. Project Mission & Identity
 
-Kapt is a **B2B DaaS (Data-as-a-Service) platform disguised as a B2C sports photography e-commerce**. It connects athletes and photographers through AI-driven search (OCR, Facial Recognition, PostGIS), while structuring valuable retail data (brands, gear wear) to sell to the market.
+Kapt is a **high-performance digital platform for the management, distribution, and monetization of official multisport event photography**. Evolving into a **DaaS (Data as a Service)** provider, it delivers hyper-segmented consumer insights based on performance and equipment usage to sports retailers and brands.
 
-## 2. Technical Stack & Standards
+## 2. Technical Stack & AI Intelligence
 
-- **Monorepo:** Turborepo with **npm** as the package manager.
-- **Frontend:** Next.js 16 (located in `/apps/web`).
-- **Backend:** Go 1.22+ using native `net/http` (located in `/services/api`).
-- **Database:** Neon (PostgreSQL) + PostGIS + SQLC for type-safe queries.
-- **Methodology:** Spec-Driven Development (SDD). All code must align with `/.spec`.
+- **Frontend:** Next.js (App Router), TypeScript, Tailwind CSS.
+- **Backend:** Go (Golang) for high-concurrency API and data processing.
+- **AI/ML Engine (Python):** 
+  - **Models:** YOLO for object/gear detection; DeepFace/FaceNet for facial recognition; PyTorch/TensorFlow for apparel segmentation.
+  - **Orchestration:** n8n manages the pipeline between uploads, AI triggers, and notifications.
+- **Infrastructure:** Docker, Portainer, Traefik/Nginx, Neon (PostgreSQL) + PostGIS.
 
-## 3. Official Glossary (Strict Camel Case for Code)
+## 3. Official Glossary (Strict Camel Case)
 
-- `seeker`: The athlete/runner (first-time or anonymous). NEVER use generic "User".
+- `seeker`: The athlete/runner (end consumer).
 - `registeredSeeker`: A returning athlete with saved biometrics and LGPD opt-in.
-- `occurrence`: The sporting event. NEVER use "Event", "Race" or "Match".
-- `promoter`: The event organizer/race director.
-- `photographer`: The freelance photographer supplying the photos.
-- `actionVolt`: Our Design System (Dark mode, neon/electric details, premium high-contrast).
+- `occurrence`: The sporting event/cobertura.
+- `promoter`: The event organizer.
+- `photographer`: The professional "Creator" supplying photos.
+- `actionVolt`: Our Design System (Table Black #000000, Volt #CEFF00 accent).
 
-## 4. Product & UX Philosophy
+## 4. Evolution Roadmap
 
-- **Zero-Click Discovery:** A `registeredSeeker` must find their photos magically via biometrics on page load, with zero friction.
-- **Cash Protection:** Photographer AI bonuses are paid ONLY upon the photo's sale.
-- **Upsell Leverage:** B-roll context photos are NEVER sold individually. They are bundled into the "Pack de Recordação" to increase AOV (Average Order Value).
+1. **Phase 1 (Current):** Infrastructure stabilization (Next.js + Go core, basic gallery, OTP auth).
+2. **Phase 2 (AI Integration):**
+  - **AI-Driven Automated Tagging:**
+    - **Facial Recognition:** High-precision identification of athletes across thousands of photos.
+    - **Equipment & Brand Detection:** Automatic identification of footwear (running shoes), apparel, and gear (bikes, helmets, watches).
+4. **Phase 4 (DaaS Launch):** Predictive analytics and real-time dashboards for retailers.
 
-## 5. Directory Governance & Communication
+## 5. Development Standards
 
-- Always use the `cmd/api` and `internal/` pattern for Go services.
-- Keep the project root clean; orchestration files only.
-- **Technical Specs:** Always in English for precision.
-- **UI Labels:** Always in Portuguese (target market: Brazil).
-- **Tone:** Professional, "cool", rich vocabulary, and performance-oriented.
+- **Methodology:** Spec-Driven Development (SDD). All code must align with `docs/specification/`.
+- **UI/UX:** Focus on "Zero-Click Discovery" and premium "Multisport Mosaic" interfaces.
+- **Security:** JWT + OTP for passwordless sessions.
+- **Localization:** UI labels in PT-BR; technical specs in English.
