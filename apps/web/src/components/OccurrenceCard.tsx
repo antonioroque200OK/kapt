@@ -1,106 +1,76 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import { MapPin, Camera, Zap, Calendar } from 'lucide-react';
+import { Calendar, Camera, MapPin, Users } from 'lucide-react';
 
-export interface OccurrenceCardProps {
+interface OccurrenceCardProps {
     title: string;
     location: string;
     photoCount: number;
     photographerCount: number;
     date: string;
-    images?: string[];
-    tag?: 'novo' | 'destaque' | 'em breve';
+    images: string[];
+    tag?: string;
 }
 
-export const OccurrenceCard = ({
+export function OccurrenceCard({
     title,
     location,
     photoCount,
     photographerCount,
     date,
-    images = [],
+    images,
     tag
-}: OccurrenceCardProps) => {
-    const [mounted, setMounted] = useState(false);
-
-    useEffect(() => {
-        setMounted(true);
-    }, []);
-
-    const displayImages = (images || []).slice(0, 4);
-
-    if (!mounted) {
-        return <div className="min-h-[450px] bg-neutral-900 rounded-xl animate-pulse" />;
-    }
-
+}: OccurrenceCardProps) {
     return (
-        <div className="flex flex-col bg-neutral-900 border border-white/10 rounded-xl overflow-hidden min-h-[450px] w-full group hover:border-volt/50 transition-all duration-300">
-
-            {/* Área do Mosaico com Zoom */}
-            <div className="relative h-48 w-full bg-neutral-800 grid grid-cols-2 grid-rows-2 gap-0.5 overflow-hidden">
+        <div className="bg-zinc-900/50 ring-2 ring-zinc-400 rounded-xl overflow-hidden hover:ring-[3px] hover:ring-volt transition-all group">
+            <div className="grid grid-cols-2 gap-0.5 h-48 relative">
                 {tag && (
-                    <span className="absolute top-4 left-4 z-30 bg-volt text-black px-2 py-1 text-[10px] font-black rounded uppercase tracking-wider shadow-lg">
+                    <span className="absolute top-3 left-3 z-10 bg-volt text-black text-[10px] font-black px-2 py-1 rounded-sm uppercase italic">
                         {tag}
                     </span>
                 )}
-
-                {displayImages.length > 0 ? (
-                    displayImages.map((src, i) => (
-                        <div key={i} className="overflow-hidden w-full h-full">
-                            <img
-                                src={src}
-                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                alt=""
-                            />
-                        </div>
-                    ))
-                ) : (
-                    <div className="col-span-2 row-span-2 flex items-center justify-center text-zinc-600 text-[10px] uppercase">Sem fotos</div>
-                )}
+                {images.slice(0, 4).map((img, i) => (
+                    <div key={i} className="bg-zinc-800 w-full h-full overflow-hidden">
+                        <img src={img} alt="" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                ))}
             </div>
 
-            {/* Conteúdo */}
-            <div className="p-6 flex flex-col flex-1">
-                <div className="mb-4">
-                    <div className="flex justify-between items-start mb-2 gap-2">
-                        <h2 className="text-white text-2xl font-bold tracking-tight leading-tight">{title}</h2>
-                        {/* Data com contraste reforçado */}
-                        <span className="shrink-0 text-[11px] text-white font-bold font-mono bg-neutral-700 px-2 py-1 rounded border border-white/10 flex items-center">
-                            <Calendar size={12} className="mr-1 text-volt" /> {date}
-                        </span>
-                    </div>
-                    <div className="flex items-center text-zinc-300 text-sm">
-                        <MapPin size={14} className="mr-2 text-volt" />
-                        {location}
+            <div className="p-5">
+                <div className="flex justify-between items-start mb-2 gap-4">
+                    <h3 className="text-xs font-bold text-white uppercase tracking-wider leading-relaxed">
+                        {title}
+                    </h3>
+                    <div className="flex items-center gap-1.5 bg-white/10 px-2.5 py-1 rounded text-[11px] font-mono font-bold text-white shrink-0">
+                        <Calendar size={11} className="text-volt" />
+                        {date}
                     </div>
                 </div>
 
-                {/* Info Grid */}
-                <div className="mt-auto pt-6 border-t border-white/5 grid grid-cols-2 gap-4">
-                    <div className="flex flex-col">
-                        <span className="flex items-center text-zinc-500 text-[10px] uppercase tracking-widest mb-1 font-semibold">
-                            <Camera size={12} className="mr-2 text-zinc-400" /> Fotos
-                        </span>
-                        <span className="text-white font-mono text-xl font-black">{photoCount}</span>
+                <div className="flex items-center gap-1.5 text-zinc-200 text-[10px] mb-3 uppercase tracking-widest font-medium">
+                    <MapPin size={10} className="text-volt" />
+                    {location}
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 border-t border-white/10 pt-3 mb-4">
+                    <div className="flex flex-col gap-0.5">
+                        <div className="flex items-center gap-1.5 text-volt text-[8px] uppercase font-bold tracking-widest">
+                            <Camera size={10} /> Fotos
+                        </div>
+                        <span className="text-base font-black text-white">{photoCount.toLocaleString()}</span>
                     </div>
-                    <div className="flex flex-col">
-                        <span className="flex items-center text-zinc-500 text-[10px] uppercase tracking-widest mb-1 font-semibold">
-                            <Zap size={12} className="mr-2 text-volt" /> Creators
-                        </span>
-                        <span className="text-white font-mono text-xl font-black">{photographerCount}</span>
+                    <div className="flex flex-col gap-0.5">
+                        <div className="flex items-center gap-1.5 text-volt text-[8px] uppercase font-bold tracking-widest">
+                            <Users size={10} /> Creators
+                        </div>
+                        <span className="text-base font-black text-white">{photographerCount}</span>
                     </div>
                 </div>
 
-                {/* Botão de ação que surge no hover */}
-                <div className="mt-6 overflow-hidden">
-                    <div className="flex items-center justify-center bg-white/5 group-hover:bg-volt py-3 rounded-lg transition-all duration-300">
-                        <span className="text-[10px] font-black uppercase tracking-widest text-white group-hover:text-black transition-colors">
-                            Acessar Galeria Completa
-                        </span>
-                    </div>
-                </div>
+                <button className="w-full bg-zinc-800 text-zinc-300 font-bold text-[9px] uppercase tracking-widest py-3 rounded hover:bg-zinc-700 transition-colors">
+                    Ver Galeria
+                </button>
             </div>
         </div>
     );
-};
+}

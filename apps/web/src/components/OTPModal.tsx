@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { X, Loader2, CheckCircle2 } from 'lucide-react';
-import { requestOTP, verifyOTP, ApiError } from '../lib/api';
+import { requestOTP, verifyOTP, ApiError } from '@/lib/api';
 
 export interface OTPModalProps {
     isOpen: boolean;

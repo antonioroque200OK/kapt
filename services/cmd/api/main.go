@@ -18,18 +18,18 @@ func main() {
 
 	conn, err := sql.Open("postgres", dbSource)
 	if err != nil {
-		log.Fatalf("Erro ao abrir conexão: %v", err)
+		log.Fatalf("failed to open connection: %v", err)
 	}
 	defer conn.Close()
 
 	if err = conn.Ping(); err != nil {
-		log.Fatalf("Banco de dados inacessível: %v", err)
+		log.Fatalf("database unreachable: %v", err)
 	}
 
-	fmt.Println("🚀 Kapt API: Conexão com o banco estabelecida!")
+	fmt.Println("🚀 Kapt API: database connection established!")
 
 	queries := repository.New(conn)
-	fmt.Println("✅ SQLC: Camada de persistência pronta.")
+	fmt.Println("✅ SQLC: persistence layer ready.")
 
 	_ = queries
 }

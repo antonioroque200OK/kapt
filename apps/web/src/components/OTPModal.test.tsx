@@ -1,10 +1,10 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { OTPModal } from './OTPModal';
-import * as api from '../lib/api';
+import { OTPModal } from '@/components/OTPModal';
+import * as api from '@/lib/api';
 
-jest.mock('../lib/api', () => ({
-    ...jest.requireActual('../lib/api'),
+jest.mock('@/lib/api', () => ({
+    ...jest.requireActual('@/lib/api'),
     requestOTP: jest.fn(),
     verifyOTP: jest.fn(),
 }));

@@ -1,102 +1,86 @@
-import Image, { type ImageProps } from "next/image";
-import { Button } from "@repo/ui/button";
-import styles from "./page.module.css";
+"use client";
 
-type Props = Omit<ImageProps, "src"> & {
-  srcLight: string;
-  srcDark: string;
-};
+import { useState } from 'react';
+import { OccurrenceCard } from '@/components/OccurrenceCard';
+import { OTPModal } from '@/components/OTPModal';
+import { Navbar } from '@/components/Navbar';
+import { MOCK_OCCURRENCES } from '@/mocks/occurrences';
 
-const ThemeImage = (props: Props) => {
-  const { srcLight, srcDark, ...rest } = props;
+const presentation_title = "Treino Coletivo Litorânea Sunset";
+const presentation_images = [
+  "https://images.unsplash.com/photo-1486218119243-13883505764c?q=80&w=600&auto=format",
+  "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=600&auto=format",
+  "https://images.unsplash.com/photo-1530143311094-34d807799e8f?q=80&w=600&auto=format",
+  "https://images.unsplash.com/photo-1502224562085-639556652f33?q=80&w=600&auto=format"
+];
+
+export default function Page() {
+  const [isOTPOpen, setIsOTPOpen] = useState(false);
+
+  const handleAuthSuccess = (token: string) => {
+    localStorage.setItem('kapt_token', token);
+    setIsOTPOpen(false);
+  };
 
   return (
-    <>
-      <Image {...rest} src={srcLight} className="imgLight" />
-      <Image {...rest} src={srcDark} className="imgDark" />
-    </>
-  );
-};
+    <main className="min-h-screen bg-black text-white p-6 md:p-12">
+      <OTPModal
+        isOpen={isOTPOpen}
+        onClose={() => setIsOTPOpen(false)}
+        onSuccess={handleAuthSuccess}
+      />
 
-export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <ThemeImage
-          className={styles.logo}
-          srcLight="turborepo-dark.svg"
-          srcDark="turborepo-light.svg"
-          alt="Turborepo logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>apps/base/app/page.tsx</code>
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+      {/* Header Container: Forced alignment via a single flex row with two distinct columns */}
+      <header className="mb-20 max-w-7xl mx-auto border-b border-white/10 pb-12 flex flex-row justify-between items-start">
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new/clone?demo-description=Learn+to+implement+a+monorepo+with+a+two+Next.js+sites+that+has+installed+three+local+packages.&demo-image=%2F%2Fimages.ctfassets.net%2Fe5382hct74si%2F4K8ZISWAzJ8X1504ca0zmC%2F0b21a1c6246add355e55816278ef54bc%2FBasic.png&demo-title=Monorepo+with+Turborepo&demo-url=https%3A%2F%2Fexamples-basic-web.vercel.sh%2F&from=templates&project-name=Monorepo+with+Turborepo&repository-name=monorepo-turborepo&repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fturborepo%2Ftree%2Fmain%2Fexamples%2Fbasic&root-directory=apps%2Fdocs&skippable-integrations=1&teamSlug=vercel&utm_source=create-turbo"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://turborepo.dev/docs?utm_source"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+        {/* Left Side: Brand Identity */}
+        <h1 className="text-volt text-6xl md:text-8xl font-black uppercase tracking-tighter leading-none italic shrink-0">
+          KAPT
+        </h1>
+
+        {/* Right Side: Navigation and Contextual Info - All strictly right-aligned */}
+        <div className="flex flex-col items-end text-right flex-1">
+          <div className="mb-10">
+            <Navbar />
+          </div>
+
+          {/* ALIGNMENT FIX: Description is now strictly within the same right-aligned flex column */}
+          <p className="text-zinc-400 text-xs md:text-sm font-semibold tracking-widest uppercase mb-1">
+            Galerias oficiais de eventos multiesportivos.
+          </p>
+
+          <span className="text-3xl md:text-5xl font-medium tracking-[0.25em] text-white uppercase font-mono leading-none mb-6">
+            Coberturas
+          </span>
+
+          <div className="flex items-center gap-6">
+            <span className="text-zinc-500 text-xs font-mono uppercase tracking-[0.2em] hidden md:inline">
+              {MOCK_OCCURRENCES.length} {MOCK_OCCURRENCES.length === 1 ? 'ATIVO' : 'ATIVOS'}
+            </span>
+            <button
+              onClick={() => setIsOTPOpen(true)}
+              className="bg-volt text-black font-extrabold text-[10px] uppercase tracking-widest px-8 py-3 rounded-sm hover:brightness-110 transition-all shadow-xl shadow-volt/20"
+            >
+              Entrar
+            </button>
+          </div>
         </div>
-        <Button appName="base" className={styles.secondary}>
-          Open alert
-        </Button>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com/templates?search=turborepo&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+      </header>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
+        {MOCK_OCCURRENCES.map((occ) => (
+          <OccurrenceCard
+            key={occ.id}
+            title={presentation_title}
+            location={occ.location}
+            photoCount={occ.photoCount}
+            photographerCount={occ.photographerCount}
+            date={occ.data}
+            images={presentation_images}
+            tag={occ.tag}
           />
-          Examples
-        </a>
-        <a
-          href="https://turborepo.dev?utm_source=create-turbo"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to turborepo.dev →
-        </a>
-      </footer>
-    </div>
+        ))}
+      </div>
+    </main>
   );
 }
