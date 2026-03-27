@@ -15,7 +15,7 @@ export function Navbar() {
                 <a
                     key={link.name}
                     href={link.href}
-                    className="text-zinc-200 hover:text-volt text-[11px] font-bold tracking-widest transition-colors uppercase"
+                    className="relative text-zinc-200 hover:text-volt/90 hover:-translate-y-0.5 text-[11px] font-bold tracking-widest uppercase transition-[color,transform] duration-[220ms] ease-out after:content-[''] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-volt/50 after:scale-x-0 after:origin-center after:transition-transform after:duration-[200ms] after:ease-out after:delay-[60ms] hover:after:scale-x-100"
                 >
                     {link.name}
                 </a>

@@ -22,7 +22,7 @@ export function OccurrenceCard({
     tag
 }: OccurrenceCardProps) {
     return (
-        <div className="bg-zinc-900/50 ring-2 ring-zinc-400 rounded-xl overflow-hidden hover:ring-[3px] hover:ring-volt transition-all group">
+        <div className="bg-zinc-900/50 ring-2 ring-zinc-400 rounded-xl overflow-hidden hover:ring-[3px] hover:ring-volt hover:-translate-y-2 transition-all duration-500 ease-out group">
             <div className="grid grid-cols-2 gap-0.5 h-48 relative">
                 {tag && (
                     <span className="absolute top-3 left-3 z-10 bg-volt text-black text-[10px] font-black px-2 py-1 rounded-sm uppercase italic">
