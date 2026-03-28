@@ -16,7 +16,7 @@ Kapt is a **high-performance digital platform for the management, distribution, 
 
 - **Frontend:** Next.js (App Router), TypeScript, Tailwind CSS.
 - **Backend:** Go (Golang) for high-concurrency API and data processing.
-- **AI/ML Engine (Python):** 
+- **AI/ML Engine (Python):**
   - **Models:** YOLO for object/gear detection; DeepFace/FaceNet for facial recognition; PyTorch/TensorFlow for apparel segmentation.
   - **Orchestration:** n8n manages the pipeline between uploads, AI triggers, and notifications.
 - **Infrastructure:** Docker, Portainer, Traefik/Nginx, Neon (PostgreSQL) + PostGIS.
@@ -32,12 +32,12 @@ Kapt is a **high-performance digital platform for the management, distribution, 
 
 ## 4. Evolution Roadmap
 
-1. **Phase 1 (Current):** Infrastructure stabilization (Next.js + Go core, basic gallery, OTP auth).
-2. **Phase 2 (AI Integration):**
+- **Phase 1 (Current):** Infrastructure stabilization (Next.js + Go core, basic gallery, OTP auth).
+- **Phase 2 (AI Integration):**
   - **AI-Driven Automated Tagging:**
     - **Facial Recognition:** High-precision identification of athletes across thousands of photos.
     - **Equipment & Brand Detection:** Automatic identification of footwear (running shoes), apparel, and gear (bikes, helmets, watches).
-4. **Phase 4 (DaaS Launch):** Predictive analytics and real-time dashboards for retailers.
+- **Phase 4 (DaaS Launch):** Predictive analytics and real-time dashboards for retailers.
 
 ## 5. Development Standards
 

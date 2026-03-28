@@ -7,7 +7,7 @@ status: "approved"
 related_issues: []
 ---
 
-# Tech Spec: Kapt Infrastructure & Engineering
+## Tech Spec: Kapt Infrastructure & Engineering
 
 ## 1. Monorepo & Package Management
 

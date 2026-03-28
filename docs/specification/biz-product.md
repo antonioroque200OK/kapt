@@ -7,7 +7,7 @@ status: "approved"
 related_issues: []
 ---
 
-# Product Specification: Kapt ⚡
+## Product Specification: Kapt ⚡
 
 ## 1. Executive Summary
 

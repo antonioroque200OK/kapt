@@ -7,7 +7,7 @@ status: "approved"
 related_issues: []
 ---
 
-# Tech Spec: OTP Verification & JWT Issuance
+## Tech Spec: OTP Verification & JWT Issuance
 
 ## 1. Context & Objective
 
@@ -46,14 +46,14 @@ Frontend contract: `handleAuthSuccess(token: string)` stores the value under
 | Status | Body                                      | Condition                          |
 |--------|-------------------------------------------|------------------------------------|
 | 400    | `{ "error": "invalid request" }`          | Malformed JSON or missing fields   |
-| 401    | `{ "error": "invalid or expired code" }` | OTP not found, used, or expired    |
-| 500    | `{ "error": "internal server error" }`   | DB or signing failure              |
+| 401    | `{ "error": "invalid or expired code" }`  | OTP not found, used, or expired    |
+| 500    | `{ "error": "internal server error" }`    | DB or signing failure              |
 
 ---
 
 ## 3. Data Flow
 
-```
+```text
 Client
   │  POST /auth/verify { email, code }
   ▼
@@ -103,14 +103,14 @@ UPDATE otp_codes SET used = true WHERE id = $1;
 
 ## 6. Files to Change
 
-| File | Action |
-|------|--------|
-| `services/sqlc/query/auth.sql` | Add `MarkOTPUsed` query |
-| `services/internal/repository/auth.sql.go` | Add generated `MarkOTPUsed` method |
-| `services/internal/repository/querier.go` | Add `MarkOTPUsed` to interface |
-| `services/internal/handler/auth.go` | Add `VerifyOTP` handler method |
-| `services/cmd/api/main.go` | Register `POST /auth/verify` route + start HTTP server |
-| `services/go.mod` / `go.sum` | Add `golang-jwt/jwt/v5` |
+| File                                       | Action                                                 |
+|--------------------------------------------|--------------------------------------------------------|
+| `services/sqlc/query/auth.sql`             | Add `MarkOTPUsed` query                                |
+| `services/internal/repository/auth.sql.go` | Add generated `MarkOTPUsed` method                     |
+| `services/internal/repository/querier.go`  | Add `MarkOTPUsed` to interface                         |
+| `services/internal/handler/auth.go`        | Add `VerifyOTP` handler method                         |
+| `services/cmd/api/main.go`                 | Register `POST /auth/verify` route + start HTTP server |
+| `services/go.mod` / `go.sum`               | Add `golang-jwt/jwt/v5`                                |
 
 ---
 

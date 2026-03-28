@@ -7,7 +7,7 @@ status: "approved"
 related_issues: ["25"]
 ---
 
-# UX Spec: Selfie Capture & LGPD Opt-In Flow
+## UX Spec: Selfie Capture & LGPD Opt-In Flow
 
 ## 1. Context & Objective
 
@@ -36,20 +36,22 @@ interface SelfieCaptureProps {
 
 ## 3. Step Machine
 
-```
+```text
 camera → consent → (submitting) → success | error
 ```
 
-| Step | Description |
-|---|---|
-| `camera` | Request `getUserMedia` permission → live `<video>` preview → "Tirar foto" CTA |
-| `consent` | Show captured thumbnail + LGPD opt-in toggles + "Confirmar" CTA |
-| `submitting` | Spinner while POSTing to `/identification/selfie` |
-| `success` | Volt checkmark + "Fotos sendo buscadas!" → calls `onSuccess` after 1s |
-| `error` | PT-BR error message + retry option |
+| Step         | Description                                                                     |
+|--------------|---------------------------------------------------------------------------------|
+| `camera`     | Request `getUserMedia` permission → live `<video>` preview → "Tirar foto" CTA   |
+| `consent`    | Show captured thumbnail + LGPD opt-in toggles + "Confirmar" CTA                 |
+| `submitting` | Spinner while POSTing to `/identification/selfie`                               |
+| `success`    | Volt checkmark + "Fotos sendo buscadas!" → calls `onSuccess` after 1s           |
+| `error`      | PT-BR error message + retry option                                              |
 
 ### Camera Permission Denied
+
 If `getUserMedia` throws a `NotAllowedError`, display a static error state:
+
 - Icon: camera crossed out
 - Copy: **"Permissão de câmera negada. Habilite o acesso nas configurações do seu navegador."**
 - No retry loop — user must fix browser settings manually.
@@ -58,10 +60,10 @@ If `getUserMedia` throws a `NotAllowedError`, display a static error state:
 
 ## 4. LGPD Consent Options
 
-| Type | `consent_type` value | Benefit shown to user |
-|---|---|---|
-| Global | `global` | "Ganhe sua 1ª foto grátis no próximo evento" |
-| Evento-específico | `event` | "Apenas para esta cobertura" |
+| Type              | `consent_type` value | Benefit shown to user                        |
+|-------------------|----------------------|----------------------------------------------|
+| Global            | `global`             | "Ganhe sua 1ª foto grátis no próximo evento" |
+| Evento-específico | `event`              | "Apenas para esta cobertura"                 |
 
 Default selection: **Global** (maximises opt-in rate per business rules).
 
@@ -76,7 +78,8 @@ submitSelfie(blob: Blob, consentType: 'global' | 'event', token: string): Promis
 ```
 
 **Request:**
-```
+
+```http
 POST /identification/selfie
 Authorization: Bearer <token>
 Content-Type: multipart/form-data
@@ -86,6 +89,7 @@ consent_type: 'global' | 'event'
 ```
 
 **Responses:**
+
 - `200` → success
 - `401` → token expired, show PT-BR error
 - `5xx` → generic PT-BR error
@@ -94,12 +98,12 @@ consent_type: 'global' | 'event'
 
 ## 6. Files Changed
 
-| File | Action |
-|---|---|
-| `apps/web/src/components/SelfieCapture.tsx` | New component |
-| `apps/web/src/components/SelfieCapture.test.tsx` | Tests |
-| `apps/web/src/lib/api.ts` | Add `submitSelfie()` |
-| `apps/web/app/page.tsx` | Open `SelfieCapture` after OTP success |
+| File                                             | Action                                 |
+|--------------------------------------------------|----------------------------------------|
+| `apps/web/src/components/SelfieCapture.tsx`      | New component                          |
+| `apps/web/src/components/SelfieCapture.test.tsx` | Tests                                  |
+| `apps/web/src/lib/api.ts`                        | Add `submitSelfie()`                   |
+| `apps/web/app/page.tsx`                          | Open `SelfieCapture` after OTP success |
 
 ---
 

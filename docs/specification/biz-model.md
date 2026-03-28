@@ -7,7 +7,7 @@ status: "approved"
 related_issues: []
 ---
 
-# Business Model Canvas: Kapt
+## Business Model Canvas: Kapt
 
 ## 1. Customer Segments
 

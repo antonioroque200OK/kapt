@@ -7,7 +7,7 @@ status: "approved"
 related_issues: ["UC02", "UC03"]
 ---
 
-# Spec: Seeker Identification & Privacy Flow
+## Spec: Seeker Identification & Privacy Flow
 
 ## 1. Context & Objectives
 

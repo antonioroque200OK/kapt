@@ -8,7 +8,7 @@ related_issues: []
 related_specs: ["tech-core.md", "ux-seeker-id.md", "biz-model.md"]
 ---
 
-# Tech Spec: Database Schema — Kapt
+## Tech Spec: Database Schema — Kapt
 
 > **Claude Code Instruction:** All queries MUST be written as `.sql` files and compiled with `sqlc generate`. Never write raw SQL strings in Go. Never use an ORM. All code lives in `internal/db/`. Use Neon branching for feature environments.
 
@@ -232,14 +232,14 @@ CREATE TABLE broll_bounty (
 
 ## 3. Key Business Logic Queries (to be implemented in SQLC)
 
-| Query Name | Purpose |
-|---|---|
+| Query Name                              | Purpose                                                                                                  |
+|-----------------------------------------|----------------------------------------------------------------------------------------------------------|
 | `GetRegisteredSeekerPhotosByOccurrence` | Powers **Zero-Click Discovery** — returns matched photos for a `registeredSeeker` at a given occurrence. |
-| `GetBrollByOccurrence` | Returns all B-roll photos for the public showcase of an occurrence. |
-| `GetOccurrencesNear` | Uses **PostGIS** `ST_DWithin` to find occurrences near a geographic point. |
-| `CountBrollByPhotographer` | Determines eligibility for LGPD B-roll bounty (max 20 per occurrence). |
-| `GetOccurrencesByStatus` | Used for UI tags — filters by `occurrence_date` vs. current date. |
-| `CreateOrderWithItems` | Transactional insert for an `order` + its `order_items`. |
+| `GetBrollByOccurrence`                  | Returns all B-roll photos for the public showcase of an occurrence.                                      |
+| `GetOccurrencesNear`                    | Uses **PostGIS** `ST_DWithin` to find occurrences near a geographic point.                               |
+| `CountBrollByPhotographer`              | Determines eligibility for LGPD B-roll bounty (max 20 per occurrence).                                   |
+| `GetOccurrencesByStatus`                | Used for UI tags — filters by `occurrence_date` vs. current date.                                        |
+| `CreateOrderWithItems`                  | Transactional insert for an `order` + its `order_items`.                                                 |
 
 ---
 

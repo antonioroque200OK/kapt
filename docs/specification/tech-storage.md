@@ -7,7 +7,7 @@ status: "approved"
 related_issues: []
 ---
 
-# Tech Spec: Hot/Cold Storage Architecture
+## Tech Spec: Hot/Cold Storage Architecture
 
 ## 1. Cloud Provider & Economics
 
