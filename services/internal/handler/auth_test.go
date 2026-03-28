@@ -190,16 +190,8 @@ func TestVerifyOTP_ReplayAttack_Returns401(t *testing.T) {
 	os.Setenv("JWT_SECRET", "test-secret-that-is-long-enough!!")
 	defer os.Unsetenv("JWT_SECRET")
 
-	usedOTP := &repository.OtpCode{
-		ID:        2,
-		Email:     "seeker@kapt.com",
-		Code:      "654321",
-		ExpiresAt: time.Now().Add(5 * time.Minute),
-		Used:      sql.NullBool{Bool: true, Valid: true},
-	}
 	// VerifyOTP stub returns ErrNoRows when otp.Used is true (mirrors DB WHERE used=false)
 	stub := &stubRepo{} // no valid OTP — used one would not be returned by DB
-	_ = usedOTP
 	h := NewHandler(stub)
 
 	body, _ := json.Marshal(map[string]string{"email": "seeker@kapt.com", "code": "654321"})
