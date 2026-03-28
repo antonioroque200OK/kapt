@@ -13,6 +13,8 @@ import (
 type Querier interface {
 	CreateOccurrence(ctx context.Context, arg CreateOccurrenceParams) (CreateOccurrenceRow, error)
 	CreatePhotographer(ctx context.Context, arg CreatePhotographerParams) (Photographer, error)
+	// Marks an OTP code as consumed to prevent replay attacks
+	MarkOTPUsed(ctx context.Context, id int32) error
 	// Registers a new seeker in the system
 	CreateSeeker(ctx context.Context, email string) (Seeker, error)
 	GetOccurrenceBySlug(ctx context.Context, slug string) (GetOccurrenceBySlugRow, error)

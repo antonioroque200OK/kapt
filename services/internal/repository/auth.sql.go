@@ -66,6 +66,16 @@ func (q *Queries) UpsertOTP(ctx context.Context, arg UpsertOTPParams) (OtpCode, 
 	return i, err
 }
 
+const markOTPUsed = `-- name: MarkOTPUsed :exec
+UPDATE otp_codes SET used = true WHERE id = $1
+`
+
+// Marks an OTP code as consumed to prevent replay attacks
+func (q *Queries) MarkOTPUsed(ctx context.Context, id int32) error {
+	_, err := q.db.ExecContext(ctx, markOTPUsed, id)
+	return err
+}
+
 const verifyOTP = `-- name: VerifyOTP :one
 SELECT id, email, code, expires_at, used, created_at
 FROM otp_codes

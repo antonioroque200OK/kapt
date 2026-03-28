@@ -23,3 +23,6 @@ WHERE email = $1
     AND used = false
     AND expires_at > NOW()
 LIMIT 1;
+-- name: MarkOTPUsed :exec
+-- Marks an OTP code as consumed to prevent replay attacks
+UPDATE otp_codes SET used = true WHERE id = $1;

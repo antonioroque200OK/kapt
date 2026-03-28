@@ -8,11 +8,11 @@ import (
 // Handler acts as the central orchestrator for HTTP requests,
 // holding shared dependencies like the database repository.
 type Handler struct {
-	repo *repository.Queries
+	repo repository.Querier
 }
 
 // NewHandler initializes a new Handler instance with the provided repository.
-func NewHandler(repo *repository.Queries) *Handler {
+func NewHandler(repo repository.Querier) *Handler {
 	return &Handler{
 		repo: repo,
 	}
