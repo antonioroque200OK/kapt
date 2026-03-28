@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { OccurrenceCard } from '@/components/OccurrenceCard';
 import { OTPModal } from '@/components/OTPModal';
+import { SelfieCapture } from '@/components/SelfieCapture';
 import { Navbar } from '@/components/Navbar';
 import { MOCK_OCCURRENCES } from '@/mocks/occurrences';
 
@@ -17,10 +18,12 @@ const presentation_images = [
 
 export default function Page() {
   const [isOTPOpen, setIsOTPOpen] = useState(false);
+  const [isSelfieCaptureOpen, setIsSelfieCaptureOpen] = useState(false);
 
   const handleAuthSuccess = (token: string) => {
     localStorage.setItem('kapt_token', token);
     setIsOTPOpen(false);
+    setIsSelfieCaptureOpen(true);
   };
 
   return (
@@ -29,6 +32,11 @@ export default function Page() {
         isOpen={isOTPOpen}
         onClose={() => setIsOTPOpen(false)}
         onSuccess={handleAuthSuccess}
+      />
+      <SelfieCapture
+        isOpen={isSelfieCaptureOpen}
+        onClose={() => setIsSelfieCaptureOpen(false)}
+        onSuccess={() => setIsSelfieCaptureOpen(false)}
       />
 
       {/* Header: Brand Identity and Top-Aligned Navigation */}
