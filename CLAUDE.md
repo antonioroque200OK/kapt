@@ -37,13 +37,27 @@ related_issues: []
 - UI Labels are strictly in Portuguese.
 - Status labels: **"Em breve"** (future) or **"Fotos Disponíveis"** (past).
 
-### 4. Testing & Pull Request Flow (Strict Protocol)
+### 4. Branch Strategy & Environments
 
-- **Test-Driven:** Every feature MUST include automated tests. Run them before staging.
-- **No Direct Main Commits:** Always use feature branches. `main` is production-only.
-- **PR Target:** All PRs target `develop`, never `main`.
-- **Production Release:** Merging `develop` → `main` only on explicit user request.
-- **PR Process:** Use Conventional Commits and wait for user review before merging.
+Three long-lived branches map to three environments:
+
+| Branch | Environment | Purpose |
+| --- | --- | --- |
+| `feat/<issue>-<desc>` | Local / Dev | Active feature development |
+| `develop` | Development | Integration of completed features |
+| `staging` | Staging | Pre-production QA & validation |
+| `main` | Production | Live — never touched without explicit release request |
+
+### 5. Pull Request & Commit Flow (Strict Protocol)
+
+- **Test-Driven:** Every feature MUST include automated tests. Run them before opening a PR.
+- **Picking up an Issue:** Always create a feature branch from `develop` first:
+  `git checkout develop && git checkout -b feat/<issue-number>-<short-description>`
+- **PR Target:** Feature branches → `develop`. Never open a PR directly to `main` or `staging`.
+- **docs: / chore: changes:** Commit directly to `develop` — no branch, no PR.
+- **Staging promotion:** `develop` → `staging` only on explicit user request.
+- **Production release:** `staging` → `main` only on explicit user request.
+- **PR Process:** Use Conventional Commits, open PR, wait for user review before merging.
 - **Fork Sync:** After every merge to `develop` in `Kapt-tech/kapt`, sync the personal fork:
 
   ```bash
