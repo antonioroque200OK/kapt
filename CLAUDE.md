@@ -40,8 +40,18 @@ related_issues: []
 ### 4. Testing & Pull Request Flow (Strict Protocol)
 
 - **Test-Driven:** Every feature MUST include automated tests. Run them before staging.
-- **No Direct Main Commits:** Always use feature branches (e.g., `feat/seeker-auth`).
-- **PR Process:** Use Conventional Commits and wait for user review.
+- **No Direct Main Commits:** Always use feature branches. `main` is production-only.
+- **PR Target:** All PRs target `develop`, never `main`.
+- **Production Release:** Merging `develop` → `main` only on explicit user request.
+- **PR Process:** Use Conventional Commits and wait for user review before merging.
+- **Fork Sync:** After every merge to `develop` in `Kapt-tech/kapt`, sync the personal fork:
+
+  ```bash
+  git fetch upstream develop
+  git checkout develop
+  git reset --hard upstream/develop
+  git push origin develop
+  ```
 
 ---
 
@@ -58,6 +68,20 @@ You MUST use this before any implementation. **Do NOT write code** until a desig
 ### 1. Commit Convention
 
 Format: `<type>(<scope>): <description>` (feat, fix, docs, style, refactor, test, chore).
+
+### 2. Branch Naming
+
+Format: `<type>/<issue-number>-<short-description>`
+
+| Type | When | Example |
+| --- | --- | --- |
+| `feat/` | New feature from Kanban issue | `feat/25-selfie-capture` |
+| `fix/` | Bug fix or security patch | `fix/38-auth-hardening` |
+| `refactor/` | Code restructuring, no behaviour change | `refactor/12-auth-middleware` |
+| `test/` | Tests only | `test/25-selfie-coverage` |
+
+- `docs:` and `chore:` changes → commit directly to `develop`, no branch needed.
+- Always include the issue number when one exists.
 
 ### 2. Documentation Naming
 
