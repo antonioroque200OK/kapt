@@ -15,7 +15,7 @@ import (
 
 const getPhotographerTier = `-- name: GetPhotographerTier :one
 SELECT id, is_founder, is_pioneer, founder_deadline,
-       total_revenue_accumulated, commission_rate
+    total_revenue_accumulated, commission_rate
 FROM photographers
 WHERE id = $1
 LIMIT 1

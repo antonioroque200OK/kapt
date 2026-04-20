@@ -23,7 +23,7 @@ Create a high-impact ABOUT page for pre-launch, focused on attracting photograph
 1. **Immersive Hero**
    - Background: low-opacity athlete video + subtle grain.
    - Short headline (1 line), subheadline with main benefit.
-   - Primary CTA: “Quero fotografar” (actionVolt).
+   - Primary CTA: “Quer fotografar?” (actionVolt).
 
 2. **Visual Manifesto**
    - Short grid text with keywords (ex: Impacto, Alcance, Valor).
