@@ -176,25 +176,6 @@ Issues MUST include: **Objective**, **Tasks for Claude Code**, and **Related Spe
 
 ---
 
-## 📚 AI Prompt Library (Copy-Paste for Humans)
-
-### A. Batch Issue Creation (New Epics)
-
-*Use this to populate the Kanban based on a new specification.*
-> "Act as my Technical Product Manager. We are going to batch-create GitHub issues for the **[Epic: NAME]**.
->
-> 1. Read specs: `[FILES.md]`.
-> 2. Break down into granular tasks using the standard Issue Template.
-> 3. Ensure titles start with `[Epic: NAME]`.
-> 4. Present drafts for review, then use `gh issue create` upon approval."
-
-### B. Feature Implementation (Task Execution)
-
-*Use this to start coding a specific issue from the "To Do" column.*
-> "Read **@CLAUDE.md** and **[MENTION_SPECS_WITH_@]**. Use `gh issue view [ID]` to fetch requirements and create a step-by-step implementation plan for **[FEATURE_NAME]**. Do not write any code until I approve the plan."
-
----
-
 ## 🗺️ System Architecture Reference
 
 For all deep technical schemas, entity relationships, and backend sequence flows, consult [docs/specification/tech-system-design.md](docs/specification/tech-system-design.md).
