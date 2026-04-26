@@ -1,6 +1,6 @@
 ---
 title: "Photographer Tiers & Seeker Discounts"
-description: "Database schema additions to support Founder/Pioneer photographer tiers and Seeker welcome discount tracking."
+description: "Database schema additions to support Founder/Alpha photographer tiers and Seeker discount tracking."
 type: "tech"
 epic: "platform"
 status: "approved"
@@ -14,9 +14,14 @@ related_specs: ["biz-model.md", "tech-db.md"]
 
 Implement the database columns required to support the KAPT monetization model:
 
-- **Photographer Tiers:** Founder (0% fee) and Pioneer (8% fee) statuses with time and
-  revenue-based eligibility limits.
-- **Seeker Discounts:** One-time welcome discount guard and identity validation timestamp.
+- **Photographer Tiers:**
+  - **Founder Alpha**: 0% launch fee / 5% lifetime fee (60 days pre-launch registration + 20GB in < 30 days).
+  - **Founder Creator**: 0% launch fee / 10% lifetime fee (60 days pre-launch registration + 2GB in < 30 days).
+  - **Standard Creator**: 15% flat fee.
+- **Seeker Discounts & Rewards:**
+  - **Welcome Pioneer**: 20% discount on first purchase. 
+  - **Historical Pack**: 1 free photo for discovering photos in past occurrences.
+  - **Volume Tier (Pack)**: Progressive discounts (3-5 photos = 30%, 6-8 photos = 40%, 9+ photos = 50%).
 
 ---
 
@@ -28,10 +33,10 @@ File: `services/sqlc/migration/000003_tiers_and_discounts.sql`
 
 | Column | Type | Default | Purpose |
 | --- | --- | --- | --- |
-| `is_founder` | `BOOLEAN` | `FALSE` | Eligibility for 0% platform fee |
-| `is_pioneer` | `BOOLEAN` | `FALSE` | Eligibility for 8% reduced fee |
-| `founder_deadline` | `TIMESTAMPTZ` | `NULL` | 6-month window cutoff for Founder status |
-| `total_revenue_accumulated` | `NUMERIC(10,2)` | `0.00` | Accumulated revenue; Founder status revoked at R$ 5,000 |
+| `is_founder_creator` | `BOOLEAN` | `FALSE` | Founder Creator Tier eligibility |
+| `is_founder_alpha` | `BOOLEAN` | `FALSE` | Founder Alpha Tier eligibility |
+| `founder_deadline` | `TIMESTAMPTZ` | `NULL` | 60-day launch window cutoff for 0% fee |
+| `total_revenue_accumulated` | `NUMERIC(10,2)` | `0.00` | Accumulated revenue; Founder 0% status revoked at R$ 5,000 |
 | `commission_rate` | `NUMERIC(5,4)` | `0.1500` | Effective commission rate (overrides default 15%) |
 
 ### Seeker columns
@@ -50,7 +55,7 @@ File: `services/sqlc/migration/000003_tiers_and_discounts.sql`
 Fetches tier status and commission rate for payout calculation.
 
 ```sql
-SELECT id, is_founder, is_pioneer, founder_deadline,
+SELECT id, is_founder_creator, is_founder_alpha, founder_deadline,
        total_revenue_accumulated, commission_rate
 FROM photographers
 WHERE id = $1;
@@ -65,17 +70,20 @@ UPDATE photographers
 SET total_revenue_accumulated = total_revenue_accumulated + $2,
     updated_at = NOW()
 WHERE id = $1
-RETURNING id, is_founder, is_pioneer, total_revenue_accumulated, commission_rate;
+RETURNING id, is_founder_creator, is_founder_alpha, total_revenue_accumulated, commission_rate;
 ```
 
 ---
 
 ## 4. Business Rules
 
-- **Founder:** `is_founder = TRUE` AND `NOW() < founder_deadline` AND
+- **Founder Alpha:** `is_founder_alpha = TRUE` AND `NOW() < founder_deadline` AND
   `total_revenue_accumulated < 5000.00` → `commission_rate = 0.0000`
-- **Pioneer:** `is_pioneer = TRUE` AND NOT Founder-eligible → `commission_rate = 0.0800`
-- **Default:** `commission_rate = 0.1500`
+  (Once deadline passes or 5k is reached → `commission_rate = 0.0500`)
+- **Founder Creator:** `is_founder_creator = TRUE` AND `NOW() < founder_deadline` AND
+  `total_revenue_accumulated < 5000.00` → `commission_rate = 0.0000`
+  (Once deadline passes or 5k is reached → `commission_rate = 0.1000`)
+- **Standard Creator (Default):** `commission_rate = 0.1500`
 - `commission_rate` is the authoritative field used at payout time — business logic
   (not the DB) is responsible for setting it correctly when tier status changes.
 - `welcome_discount_used` is a one-time flag — once `TRUE`, the 20% discount cannot
@@ -99,6 +107,6 @@ RETURNING id, is_founder, is_pioneer, total_revenue_accumulated, commission_rate
 
 - Migration applies cleanly against the existing schema.
 - `sqlc generate` completes without errors.
-- `Photographer` model in Go includes all 5 new fields.
+- `Photographer` model in Go includes all 5 tier fields.
 - `Seeker` model in Go includes both new fields.
 - `go build ./...` passes.

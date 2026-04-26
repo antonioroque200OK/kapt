@@ -19,8 +19,8 @@ type photographerResponse struct {
 	StripeAccountID         *string          `json:"stripe_account_id"`
 	CreatedAt               time.Time        `json:"created_at"`
 	UpdatedAt               time.Time        `json:"updated_at"`
-	IsFounder               bool             `json:"is_founder"`
-	IsPioneer               bool             `json:"is_pioneer"`
+	IsFounderCreator        bool             `json:"is_founder_creator"`
+	IsFounderAlpha          bool             `json:"is_founder_alpha"`
 	FounderDeadline         *time.Time       `json:"founder_deadline"`
 	TotalRevenueAccumulated decimal.Decimal  `json:"total_revenue_accumulated"`
 	CommissionRate          decimal.Decimal  `json:"commission_rate"`
@@ -33,8 +33,8 @@ func toPhotographerResponse(p repository.Photographer) photographerResponse {
 		Email:                   p.Email,
 		CreatedAt:               p.CreatedAt,
 		UpdatedAt:               p.UpdatedAt,
-		IsFounder:               p.IsFounder,
-		IsPioneer:               p.IsPioneer,
+		IsFounderCreator:        p.IsFounderCreator,
+		IsFounderAlpha:          p.IsFounderAlpha,
 		TotalRevenueAccumulated: p.TotalRevenueAccumulated,
 		CommissionRate:          p.CommissionRate,
 	}

@@ -2,8 +2,8 @@
 
 -- Photographer tier columns: Founder/Pioneer program and financial tracking
 ALTER TABLE photographers
-    ADD COLUMN IF NOT EXISTS is_founder                  BOOLEAN       NOT NULL DEFAULT FALSE,
-    ADD COLUMN IF NOT EXISTS is_pioneer                  BOOLEAN       NOT NULL DEFAULT FALSE,
+    ADD COLUMN IF NOT EXISTS is_founder_creator          BOOLEAN       NOT NULL DEFAULT FALSE,
+    ADD COLUMN IF NOT EXISTS is_founder_alpha            BOOLEAN       NOT NULL DEFAULT FALSE,
     ADD COLUMN IF NOT EXISTS founder_deadline            TIMESTAMPTZ,
     ADD COLUMN IF NOT EXISTS total_revenue_accumulated   NUMERIC(12,2) NOT NULL DEFAULT 0.00,
     ADD COLUMN IF NOT EXISTS commission_rate             NUMERIC(5,2)  NOT NULL DEFAULT 15.00;
@@ -23,5 +23,5 @@ ALTER TABLE photographers
     DROP COLUMN IF EXISTS commission_rate,
     DROP COLUMN IF EXISTS total_revenue_accumulated,
     DROP COLUMN IF EXISTS founder_deadline,
-    DROP COLUMN IF EXISTS is_pioneer,
-    DROP COLUMN IF EXISTS is_founder;
+    DROP COLUMN IF EXISTS is_founder_alpha,
+    DROP COLUMN IF EXISTS is_founder_creator;
